@@ -6,9 +6,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreatePasswordResetsTable
+ * Class CreateAttributeValuesTable
  */
-class CreatePasswordResetsTable extends Migration
+class CreateAttributeValuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,10 +17,11 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+        Schema::create('attribute_values', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('attribute_id')->default(0)->index();
+            $table->string('value');
+            $table->string('url');
         });
     }
 
@@ -31,6 +32,6 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('password_resets');
+        Schema::dropIfExists('attribute_values');
     }
 }

@@ -25,3 +25,8 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+$factory->state(\Henry\Domain\User\User::class, 'superAdmin', [
+    'name' => 'Henry',
+    'email' => 'phuongdm1987@gmail.com'
+]);

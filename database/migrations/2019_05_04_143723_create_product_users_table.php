@@ -1,15 +1,14 @@
 <?php
 declare(strict_types=1);
 
-use Henry\Domain\Role\Role;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateUsersTable
+ * Class CreateProductUsersTable
  */
-class CreateUsersTable extends Migration
+class CreateProductUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,14 +17,11 @@ class CreateUsersTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('product_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('profile_id')->default(Role::NORMAL_USER);
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('amount')->default(0);
             $table->timestamps();
         });
     }
@@ -37,6 +33,6 @@ class CreateUsersTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('product_users');
     }
 }
